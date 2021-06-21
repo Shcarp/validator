@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="提交到哪里" method="post"  enctype="multipart/form-data">
+        <input type="text">
+    </form>
+    
+</body>
+<script src="Validate.js"></script>
+<script>
+    let rules = [{
+                name: 'radio',
+                rules: {required: true, message: '单选列表是必选项'},
+            }, {
+                name: 'checkbox',
+                rules: {required: true, message: '多选列表是必选项'},
+            }, {
+                name: 'qq',
+                rules: {required: true, message: 'qq必填'},
+            }, {
+                name: 'mobile',
+                rules: [{required: true, message: 'mobile必填'}, {mobile: true, message: 'mobile格式不对'}],
+            }, {
+                name: 'vcode',
+                rules: {match: true, message: '不同'},
+            }, {
+                name: 'idcard',
+                rules: [{required: true, message: 'idcard必填'},{idcard:true,message:"身份证号码"}],
+            }]
+    const data = {
+        radio:"11111",
+        checkbox : "222222"
+    }      
+    const validate = new Validate(rules,data) 
+    validate.customize("sss",function(value){
+        console.log(value)
+        return {
+            code : 1,
+            msg : "11111"
+        }
+    })
+    // validate.check('radio',[7,8],(x)=>{
+    //     console.log(x)
+    // })
+    // validate.check('checkbox',"",(x)=>{
+    //     console.log(x)
+    // })
+    // validate.check('mobile',"18873976468",(x)=>{
+    //     console.log(x)
+    // })
+    // validate.check('vcode',[7,8],(x)=>{
+    //     console.log(x)
+    // })
+    validate.check('idcard',"430524200102026637",(x)=>{
+        console.log(x)
+    })
+    // const atr =  validate.replaceStr("长度为 #0# 到 #0# 位",[7,8])
+    // console.log(atr)
+    console.log(validate)
+</script>
+</html>
